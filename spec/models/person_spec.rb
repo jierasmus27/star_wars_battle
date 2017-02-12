@@ -30,6 +30,10 @@ RSpec.describe Person, type: :model do
   }
 
   describe "#find_by_id" do
+    before(:each) do
+      Rails.cache.clear
+    end
+
     it "sets all attributes received" do
       allow(SwapiRb::People).to receive(:find_by_id).with(1).and_return(params)
 

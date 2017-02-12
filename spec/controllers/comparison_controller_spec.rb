@@ -58,9 +58,13 @@ RSpec.describe ComparisonController, type: :controller do
   }
 
   describe "GET 'index'" do
+    before(:each) do
+      Rails.cache.clear
+    end
+
     it "assigns an array of to people" do
-      person1 = Person.new(all_params[1])
-      person2 = Person.new(all_params[2])
+      person1 = Person.new(all_params[0])
+      person2 = Person.new(all_params[1])
 
       allow(SwapiRb::People).to receive(:all).and_return(all_params)
 
@@ -68,16 +72,27 @@ RSpec.describe ComparisonController, type: :controller do
       expect(assigns(:people)).to be_instance_of(Array)
       expect(assigns(:people).size).to eq(2)
     end
-
-    # it "renders the :list view" do
-    #   allow(SwapiRb::People).to receive(:all).and_return(all_params)
-    #
-    #   get :list
-    #   expect( response ).to render_template :list
-    # end
   end
 
-  describe "GET 'compare'" do
+  describe "POST 'compare'" do
+    before(:each) do
+      Rails.cache.clear
+    end
 
+    it "sets the primary object correctly" do
+      allow(SwapiRb::People).to receive(:find_by_id).and_return(all_params[0])
+
+      post :compare, params = {:primary_id => 1, :secondary_id => 2}
+      expect(assigns(:primary)).to be_instance_of(Person)
+      expect(assigns(:primary).name).to eq("Luke Skywalker")
+    end
+
+    it "sets the secondary object correctly" do
+      allow(SwapiRb::People).to receive(:find_by_id).and_return(all_params[1])
+
+      post :compare, params = {:primary_id => 1, :secondary_id => 2}
+      expect(assigns(:secondary)).to be_instance_of(Person)
+      expect(assigns(:secondary).name).to eq("C-3PO")
+    end
   end
 end
