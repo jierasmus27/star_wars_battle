@@ -2,13 +2,21 @@ class ComparisonController < ApplicationController
   before_action :set_entities, only: [:compare]
 
   def list
-    @people = Person.all
+    begin
+      @people = Person.all
+    rescue => e
+      render :template => 'error'
+    end
   end
 
   def compare
-    @results = @primary.compared_to(@secondary)
+    begin
+      @results = @primary.compared_to(@secondary)
 
-    render :partial => 'compare'
+      render :partial => 'compare'
+    rescue => e
+      render :partial => 'error'
+    end
   end
 
   private
