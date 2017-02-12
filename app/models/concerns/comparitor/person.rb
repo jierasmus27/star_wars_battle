@@ -1,5 +1,11 @@
 module Comparitor
   module Person
+    include Comparable
+
+    def <=>(secondary)
+      score <=> secondary.score
+    end
+
     def compared_to(secondary)
       winner = "It is a tie"
       winner = name if score > secondary.score

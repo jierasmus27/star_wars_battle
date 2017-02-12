@@ -165,4 +165,43 @@ RSpec.describe Person, type: :model do
     end
   end
 
+  describe "Comparison" do
+    before(:each) do
+      @primary = Person.new
+      @primary.name = "Luke Skywalker"
+      @primary.films = []
+      @primary.vehicles = []
+      @primary.starships = []
+      @primary.height = 0
+      @primary.mass = 0
+
+      @secondary = Person.new
+      @secondary.name = "Darth Vader"
+      @secondary.films = []
+      @secondary.vehicles = []
+      @secondary.starships = []
+      @secondary.height = 0
+      @secondary.mass = 0
+    end
+
+    it "successfully implements the spaceship for the primary having a better score" do
+      @primary.mass = "1000"
+
+      expect(@primary > @secondary).to be(true)
+    end
+
+    it "successfully implements the spaceship for the secondary having a better score" do
+      @secondary.mass = "1000"
+
+      expect(@primary < @secondary).to be(true)
+    end
+
+    it "successfully implements the spaceship for the primary and secondary being equal" do
+      @primary.mass = "1000"
+      @secondary.mass = "1000"
+
+      expect(@primary == @secondary).to be(true)
+    end
+  end
+
 end
