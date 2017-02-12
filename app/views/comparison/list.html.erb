@@ -1,0 +1,14 @@
+<%= form_tag("/compare", :remote => true, :id => "new_article") %>
+    <div class="field">
+      <%= select_tag 'primary_id', options_for_select(@people.collect{ |p| [p.name, p.id] } ) %>
+    </div>
+    <div class="field">
+      <%= select_tag 'secondary_id', options_for_select(@people.collect{ |p| [p.name, p.id] } ) %>
+    </div>
+
+    <div class="actions">
+      <input type="submit" value="Compare"/>
+    </div>
+
+    <div id="results">
+    </div>
