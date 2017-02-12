@@ -24,6 +24,8 @@ gem 'coffee-rails', '~> 4.2'
 # Custom Star Wars API gem
 gem 'swapi_rb', :git => 'git@github.com:jierasmus27/Swapi_rb.git'
 
+gem 'bootstrap-sass', '~> 3.3.1'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks

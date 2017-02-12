@@ -1,14 +1,23 @@
 <%= form_tag("/compare", :remote => true, :id => "new_article") %>
-    <div class="field">
-      <%= select_tag 'primary_id', options_for_select(@people.collect{ |p| [p.name, p.id] } ) %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4">
+      <%= label_tag(:secondary_id, "The incumbent:") %>
+      <%= select_tag 'primary_id', options_for_select(@people.collect{ |p| [p.name, p.id] } ), {:class => 'form-control'} %>
     </div>
-    <div class="field">
-      <%= select_tag 'secondary_id', options_for_select(@people.collect{ |p| [p.name, p.id] } ) %>
+    <div class="col-md-4">
+      <%= label_tag(:secondary_id, "The challenger:") %>
+      <%= select_tag 'secondary_id', options_for_select(@people.collect{ |p| [p.name, p.id] }), {:class => 'form-control'} %>
     </div>
-
-    <div class="actions">
-      <input type="submit" value="Compare"/>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <br />
+      <input type="submit" value="Compare" class="btn btn-warning"/>
     </div>
-
-    <div id="results">
+  </div>
+  <div class="row">
+    <div class="col-md-10" id="results">
     </div>
+  </div>
+</div>

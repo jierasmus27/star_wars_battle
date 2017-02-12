@@ -4,11 +4,17 @@
     <title>StarWars Battle</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <div class="container-fluid">
+      <div class="jumbotron" style="background-color:#ffc955 !important;">
+        <h1>Star Wars Battle</h1>
+        <p>Find out which Star Wars character is superior </p>
+      </div>
+    </div>
     <%= yield %>
   </body>
 </html>
