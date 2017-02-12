@@ -20,7 +20,9 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-gem 'swapi_rb', :path => 'swapi_rb/'
+#
+# Custom Star Wars API gem
+gem 'swapi_rb', :git => 'git@github.com:jierasmus27/Swapi_rb.git'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
