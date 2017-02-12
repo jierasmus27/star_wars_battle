@@ -94,5 +94,25 @@ RSpec.describe ComparisonController, type: :controller do
       expect(assigns(:secondary)).to be_instance_of(Person)
       expect(assigns(:secondary).name).to eq("C-3PO")
     end
+
+    it "sets the comparison to a hash" do
+      allow(SwapiRb::People).to receive(:find_by_id).with('1').and_return(all_params[0])
+      allow(SwapiRb::People).to receive(:find_by_id).with('2').and_return(all_params[1])
+
+      post :compare, params = {:primary_id => 1, :secondary_id => 2}
+      expect(assigns(:results)).to be_instance_of(Hash)
+    end
+
+    it "the comparison hash has the 4 correct keys" do
+      allow(SwapiRb::People).to receive(:find_by_id).with('1').and_return(all_params[0])
+      allow(SwapiRb::People).to receive(:find_by_id).with('2').and_return(all_params[1])
+
+      post :compare, params = {:primary_id => 1, :secondary_id => 2}
+      expect(assigns(:results)).to be_instance_of(Hash)
+      expect(assigns(:results)).to have_key("winner")
+      expect(assigns(:results)).to have_key("strengths")
+      expect(assigns(:results)).to have_key("weaknesses")
+      expect(assigns(:results)).to have_key("ties")
+    end
   end
 end
