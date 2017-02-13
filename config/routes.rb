@@ -4,4 +4,6 @@ Rails.application.routes.draw do
 
   post 'compare', to: 'comparison#compare', as: "compare"
 
+  post 'compare_ships', to: 'comparison#compare_ships', as: "compare_ships"
+
 end
