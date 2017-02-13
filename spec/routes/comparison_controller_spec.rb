@@ -12,5 +12,9 @@ describe "Routes", :type => "routing" do
     it "routes to #compare for form submissions" do
       expect(post("/compare")).to route_to(:controller => "comparison", :action => "compare")
     end
+
+    it "routes to #compare for form submissions" do
+      expect(post("/compare_ships")).to route_to(:controller => "comparison", :action => "compare_ships")
+    end
   end
 end
