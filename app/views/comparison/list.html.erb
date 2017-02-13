@@ -1,14 +1,54 @@
-<%= form_tag("/compare", :remote => true, :id => "new_article") %>
-    <div class="field">
-      <%= select_tag 'primary_id', options_for_select(@people.collect{ |p| [p.name, p.id] } ) %>
+<%= form_tag("/compare", :remote => true, :id => "new_article") do %>
+<div class="container-fluid">
+  <div class="row">
+    <h2> &nbsp;Compare Characters</h2>
+    <div class="col-md-4">
+      <%= label_tag(:secondary_id, "The incumbent:") %>
+      <%= select_tag 'primary_id', options_for_select(@people.collect{ |p| [p.name, p.id] } ), {:class => 'form-control'} %>
     </div>
-    <div class="field">
-      <%= select_tag 'secondary_id', options_for_select(@people.collect{ |p| [p.name, p.id] } ) %>
+    <div class="col-md-4">
+      <%= label_tag(:secondary_id, "The challenger:") %>
+      <%= select_tag 'secondary_id', options_for_select(@people.collect{ |p| [p.name, p.id] }), {:class => 'form-control'} %>
     </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <br />
+      <input type="submit" value="Compare characters" class="btn btn-warning"/>
+    </div>
+  </div>
+  <div class="row">
+    <br />
+    <div class="col-md-10" id="results">
+    </div>
+  </div>
+</div>
+<% end %>
 
-    <div class="actions">
-      <input type="submit" value="Compare"/>
+<%= form_tag("/compare_ships", :remote => true, :id => "ships_form") do %>
+<div class="container-fluid">
+  <div class="row">
+    <h2> &nbsp;Compare Starships</h2>
+    <div class="col-md-4">
+      <%= label_tag(:primary_ship_id, "Starship one:") %>
+      <%= select_tag 'primary_ship_id', options_for_select(@starships.collect{ |s| [s.name, s.id] } ), {:class => 'form-control'} %>
     </div>
-
-    <div id="results">
+    <div class="col-md-4">
+      <%= label_tag(:secondary_ship_id, "Challenger ship:") %>
+      <%= select_tag 'secondary_ship_id', options_for_select(@starships.collect{ |s| [s.name, s.id] }), {:class => 'form-control'} %>
     </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <br />
+      <input type="submit" value="Compare starships" class="btn btn-warning"/>
+    </div>
+  </div>
+  <div class="row">
+    <br />
+    <div class="col-md-10" id="ship_results">
+    </div>
+    <br />
+  </div>
+</div>
+<% end %>

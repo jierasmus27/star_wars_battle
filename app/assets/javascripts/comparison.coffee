@@ -14,7 +14,11 @@
 # });
 $(document).ready ->
   $("#new_article").on("ajax:success", (e, data, status, xhr) ->
-    console.log "Something"
     $("#results").html xhr.responseText
   ).on "ajax:error", (e, xhr, status, error) ->
     $("#results").html "<p>ERROR</p>"
+
+  $("#ships_form").on("ajax:success", (e, data, status, xhr) ->
+    $("#ship_results").html xhr.responseText
+  ).on "ajax:error", (e, xhr, status, error) ->
+    $("#ship_results").html "<p>ERROR</p>"

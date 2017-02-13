@@ -1,15 +1,35 @@
-  <div class="actions">
-    <%= @results["winner"] %>
+<div class="container" style="border:1px solid #cecece;">
+  <div class="row">
+    <div class="actions col-md-6">
+      <h3>The winner is: <strong><%= @results["winner"] %></strong></h3>
+    </div>
   </div>
-  <div class="actions">
-    Strengths:
-    <%= @results["strengths"] %>
-  </div>
-  <div class="actions">
-    Weaknesses:
-    <%= @results["weaknesses"] %>
-  </div>
-  <div class="actions">
-    Ties:
-    <%= @results["ties"] %>
-  </div>
+  <div class="row">
+    <div class="actions col-md-4">
+      <h3>Strengths:</h3>
+      <% @results["strengths"].each do |s| %>
+        <p class="text-success"><%= s %></p>
+      <% end %>
+      <% if @results["strengths"].size == 0 %>
+        <p><strong>None</strong></p>
+      <% end %>
+    </div>
+    <div class="actions col-md-4">
+      <h3>Weaknesses:</h3>
+      <% @results["weaknesses"].each do |s| %>
+        <p class="text-danger"><%= s %></p>
+      <% end %>
+      <% if @results["weaknesses"].size == 0 %>
+        <p><strong>None</strong></p>
+      <% end %>
+    </div>
+    <div class="actions col-md-4">
+      <h3>Ties:</h3>
+      <% @results["ties"].each do |s| %>
+        <p class="text-warning"><%= s %></p>
+      <% end %>
+      <% if @results["ties"].size == 0 %>
+        <p><strong>None</strong></p>
+      <% end %>
+    </div>
+</div>
