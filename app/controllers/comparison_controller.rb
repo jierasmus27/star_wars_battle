@@ -13,7 +13,6 @@ class ComparisonController < ApplicationController
 
   def compare
     begin
-      byebug
       @results = @primary.compared_to(@secondary)
 
       render :partial => 'compare'
