@@ -2,7 +2,7 @@ class ComparisonController < ApplicationController
   before_action :validate_allowed_entities, only: [:compare]
   before_action :set_entities, only: [:compare]
 
-  def list
+  def index
     begin
       @people = Person.all
       @starships = Starship.all

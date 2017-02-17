@@ -9,7 +9,7 @@ RSpec.describe ComparisonController, type: :controller do
   let (:death_star) { create(:starship_request, :death_star) }
   let (:starship_all_result ) { [sentinel, death_star] }
 
-  describe "GET 'list'" do
+  describe "GET 'index'" do
     before(:each) do
       Rails.cache.clear
 
@@ -18,14 +18,14 @@ RSpec.describe ComparisonController, type: :controller do
     end
 
     it "assigns an array to people" do
-      get :list
+      get :index
 
       expect(assigns(:people)).to be_instance_of(Array)
       expect(assigns(:people).size).to eq(2)
     end
 
     it "assigns an array to starships" do
-      get :list
+      get :index
 
       expect(assigns(:starships)).to be_instance_of(Array)
       expect(assigns(:starships).size).to eq(2)
