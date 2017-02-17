@@ -10,11 +10,11 @@ describe "Routes", :type => "routing" do
     end
 
     it "routes to #compare for form submissions" do
-      expect(post("/compare")).to route_to(:controller => "comparison", :action => "compare")
+      expect(get("/compare/person")).to route_to(:controller => "comparison", :action => "compare", :entity => "person")
     end
 
-    it "routes to #compare for form submissions" do
-      expect(post("/compare_ships")).to route_to(:controller => "comparison", :action => "compare_ships")
-    end
+    # it "routes to #compare for form submissions" do
+    #   expect(post("/compare_ships")).to route_to(:controller => "comparison", :action => "compare_ships")
+    # end
   end
 end

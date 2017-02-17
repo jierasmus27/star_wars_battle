@@ -1,4 +1,4 @@
-<%= form_tag("/compare", :remote => true, :id => "new_article") do %>
+<%= form_tag("/compare/person", :remote => true, :id => "new_article", method: :get) do %>
 <div class="container-fluid">
   <div class="row">
     <h2> &nbsp;Compare Characters</h2>
@@ -25,7 +25,7 @@
 </div>
 <% end %>
 
-<%= form_tag("/compare_ships", :remote => true, :id => "ships_form") do %>
+<%= form_tag("/compare/starship", :remote => true, :id => "ships_form", method: :get) do %>
 <div class="container-fluid">
   <div class="row">
     <h2> &nbsp;Compare Starships</h2>

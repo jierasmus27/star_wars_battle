@@ -1,6 +1,6 @@
 class ComparisonController < ApplicationController
-  before_action :set_people, only: [:compare]
-  before_action :set_starships, only: [:compare_ships]
+  before_action :validate_allowed_entities, only: [:compare]
+  before_action :set_entities, only: [:compare]
 
   def list
     begin
@@ -21,25 +21,22 @@ class ComparisonController < ApplicationController
     end
   end
 
-  def compare_ships
-    begin
-      @results = @primary.compared_to(@secondary)
-
-      render :partial => 'compare'
-    rescue => e
-      render :partial => 'error'
-    end
-  end
-
   private
 
-  def set_people
-    @primary   = Person.find_by_id(params[:primary_id])
-    @secondary = Person.find_by_id(params[:secondary_id])
+  def set_entities
+    @primary = entity_class.find_by_id(params[:primary_id])
+    @secondary = entity_class.find_by_id(params[:secondary_id])
   end
 
-  def set_starships
-    @primary   = Starship.find_by_id(params[:primary_ship_id])
-    @secondary = Starship.find_by_id(params[:secondary_ship_id])
+  def entity_class
+    params["entity"].capitalize.constantize
+  end
+
+  def validate_allowed_entities
+    raise ArgumentError "Incorrect entity passed" unless allowed_entities.include? params["entity"]
+  end
+
+  def allowed_entities
+    ["person", "starship"]
   end
 end

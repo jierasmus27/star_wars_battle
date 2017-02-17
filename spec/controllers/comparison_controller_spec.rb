@@ -32,78 +32,83 @@ RSpec.describe ComparisonController, type: :controller do
     end
   end
 
-  describe "POST 'compare'" do
-    before(:each) do
-      Rails.cache.clear
+  describe "GET 'compare'" do
+    context "for people" do
+      before(:each) do
+        Rails.cache.clear
 
-      allow(SwapiRb::People).to receive(:find_by_id).with('1').and_return(luke_skywalker)
-      allow(SwapiRb::People).to receive(:find_by_id).with('2').and_return(c3po)
+        allow(SwapiRb::People).to receive(:find_by_id).with('1').and_return(luke_skywalker)
+        allow(SwapiRb::People).to receive(:find_by_id).with('2').and_return(c3po)
+      end
+
+      it "sets the primary object correctly" do
+        get :compare, :entity => "person", :primary_id => 1, :secondary_id => 2
+
+        expect(assigns(:primary)).to be_instance_of(Person)
+        expect(assigns(:primary).name).to eq(luke_skywalker.name)
+      end
+
+      it "sets the secondary object correctly" do
+        get :compare, :entity => "person", :primary_id => 1, :secondary_id => 2
+
+        expect(assigns(:secondary)).to be_instance_of(Person)
+        expect(assigns(:secondary).name).to eq(c3po.name)
+      end
+
+      it "sets the comparison to a hash" do
+        get :compare, :entity => "person", :primary_id => 1, :secondary_id => 2
+
+        expect(assigns(:results)).to be_instance_of(Hash)
+      end
+
+      it "the comparison hash has the 4 correct keys" do
+        get :compare, :entity => "person", :primary_id => 1, :secondary_id => 2
+
+        expect(assigns(:results)).to be_instance_of(Hash)
+        expect(assigns(:results)).to have_key("winner")
+        expect(assigns(:results)).to have_key("strengths")
+        expect(assigns(:results)).to have_key("weaknesses")
+        expect(assigns(:results)).to have_key("ties")
+      end
     end
 
-    it "sets the primary object correctly" do
-      post :compare, params = {:primary_id => 1, :secondary_id => 2}
-      expect(assigns(:primary)).to be_instance_of(Person)
-      expect(assigns(:primary).name).to eq(luke_skywalker.name)
-    end
+    context "for starships" do
+      before(:each) do
+        Rails.cache.clear
 
-    it "sets the secondary object correctly" do
-      post :compare, params = {:primary_id => 1, :secondary_id => 2}
-      expect(assigns(:secondary)).to be_instance_of(Person)
-      expect(assigns(:secondary).name).to eq(c3po.name)
-    end
+        allow(SwapiRb::Starship).to receive(:find_by_id).with('5').and_return(sentinel)
+        allow(SwapiRb::Starship).to receive(:find_by_id).with('9').and_return(death_star)
+      end
 
-    it "sets the comparison to a hash" do
-      post :compare, params = {:primary_id => 1, :secondary_id => 2}
-      expect(assigns(:results)).to be_instance_of(Hash)
-    end
+      it "sets the primary object correctly" do
+        get :compare, :entity => "starship", :primary_id => 5, :secondary_id => 9
 
-    it "the comparison hash has the 4 correct keys" do
-      post :compare, params = {:primary_id => 1, :secondary_id => 2}
+        expect(assigns(:primary)).to be_instance_of(Starship)
+        expect(assigns(:primary).name).to eq(sentinel.name)
+      end
 
-      expect(assigns(:results)).to be_instance_of(Hash)
-      expect(assigns(:results)).to have_key("winner")
-      expect(assigns(:results)).to have_key("strengths")
-      expect(assigns(:results)).to have_key("weaknesses")
-      expect(assigns(:results)).to have_key("ties")
-    end
-  end
+      it "sets the secondary object correctly" do
+        get :compare, :entity => "starship", :primary_id => 5, :secondary_id => 9
 
-  describe "POST 'compare_ships'" do
-    before(:each) do
-      Rails.cache.clear
+        expect(assigns(:secondary)).to be_instance_of(Starship)
+        expect(assigns(:secondary).name).to eq(death_star.name)
+      end
 
-      allow(SwapiRb::Starship).to receive(:find_by_id).with('5').and_return(sentinel)
-      allow(SwapiRb::Starship).to receive(:find_by_id).with('9').and_return(death_star)
-    end
+      it "sets the comparison to a hash" do
+        get :compare, :entity => "starship", :primary_id => 5, :secondary_id => 9
 
-    it "sets the primary object correctly" do
-      post :compare_ships, params = {:primary_ship_id => 5, :secondary_ship_id => 9}
+        expect(assigns(:results)).to be_instance_of(Hash)
+      end
 
-      expect(assigns(:primary)).to be_instance_of(Starship)
-      expect(assigns(:primary).name).to eq(sentinel.name)
-    end
+      it "the comparison hash has the 4 correct keys" do
+        get :compare, :entity => "starship", :primary_id => 5, :secondary_id => 9
 
-    it "sets the secondary object correctly" do
-      post :compare_ships, params = {:primary_ship_id => 5, :secondary_ship_id => 9}
-
-      expect(assigns(:secondary)).to be_instance_of(Starship)
-      expect(assigns(:secondary).name).to eq(death_star.name)
-    end
-
-    it "sets the comparison to a hash" do
-      post :compare_ships, params = {:primary_ship_id => 5, :secondary_ship_id => 9}
-
-      expect(assigns(:results)).to be_instance_of(Hash)
-    end
-
-    it "the comparison hash has the 4 correct keys" do
-      post :compare_ships, params = {:primary_ship_id => 5, :secondary_ship_id => 9}
-
-      expect(assigns(:results)).to be_instance_of(Hash)
-      expect(assigns(:results)).to have_key("winner")
-      expect(assigns(:results)).to have_key("strengths")
-      expect(assigns(:results)).to have_key("weaknesses")
-      expect(assigns(:results)).to have_key("ties")
+        expect(assigns(:results)).to be_instance_of(Hash)
+        expect(assigns(:results)).to have_key("winner")
+        expect(assigns(:results)).to have_key("strengths")
+        expect(assigns(:results)).to have_key("weaknesses")
+        expect(assigns(:results)).to have_key("ties")
+      end
     end
   end
 end
