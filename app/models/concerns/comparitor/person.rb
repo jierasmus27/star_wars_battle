@@ -6,6 +6,16 @@ module Comparitor
       score <=> secondary.score
     end
 
+    def score
+      score = 0
+      score += films.count
+      score += vehicles.count * 2
+      score += starships.count * 2
+      score += (height.to_i/50).round(0).to_i
+      score += (mass.to_i/40).round(0).to_i
+      score
+    end
+
     def compared_to(secondary)
       winner = "It is a tie"
       winner = name if score > secondary.score

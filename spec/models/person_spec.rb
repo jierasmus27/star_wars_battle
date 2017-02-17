@@ -1,50 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe Person, type: :model do
-  let(:params) {
-    OpenStruct.new(
-      :birth_year => "19 BBY",
-      :eye_color => "Blue",
-      :films => [
-          "http://swapi.co/api/films/1/"
-      ],
-      :gender => "Male",
-      :hair_color => "Blond",
-      :height => "172",
-      :homeworld => "http://swapi.co/api/planets/1/",
-      :mass => "77",
-      :name => "Luke Skywalker",
-      :skin_color => "Fair",
-      :created => "2014-12-09T13:50:51.644000Z",
-      :edited => "2014-12-10T13:52:43.172000Z",
-      :species => [
-             "http://swapi.co/api/species/1/"
-      ],
-      :starships => [
-             "http://swapi.co/api/starships/12/"
-      ],
-      :url => "http://swapi.co/api/people/1/",
-      :vehicles => [
-             "http://swapi.co/api/vehicles/14/"
-      ])
-  }
+  let(:luke_skywalker_request_result) { create(:person_request, :luke_skywalker) }
 
   describe "#find_by_id" do
     before(:each) do
       Rails.cache.clear
+
+      allow(SwapiRb::People).to receive(:find_by_id).with(1).and_return(luke_skywalker_request_result)
     end
 
     it "sets all attributes received" do
-      allow(SwapiRb::People).to receive(:find_by_id).with(1).and_return(params)
-
       person = Person.find_by_id(1)
 
-      expect(person.name).to eq(params.name)
+      expect(person.name).to eq(luke_skywalker_request_result.name)
     end
 
     it "sets the id attribute from the url" do
-      allow(SwapiRb::People).to receive(:find_by_id).with(1).and_return(params)
-
       person = Person.find_by_id(1)
 
       expect(person.id).to eq(1)
@@ -59,57 +31,47 @@ RSpec.describe Person, type: :model do
       @person.starships = []
       @person.height = 0
       @person.mass = 0
+
+      allow(SwapiRb::People).to receive(:find_by_id).with(1).and_return(luke_skywalker_request_result)
     end
 
     it "assigns one point for each film the character was in" do
-      allow(SwapiRb::People).to receive(:find_by_id).with(1).and_return(params)
-      person = Person.find_by_id(1)
-
       @person.films = ["A New Hope", "The Force Awakens"]
+
       expect(@person.score).to eq(2)
     end
 
     it "assigns two points per vehicle" do
-      allow(SwapiRb::People).to receive(:find_by_id).with(1).and_return(params)
-      person = Person.find_by_id(1)
-
       @person.vehicles = ["AT-AT"]
+
       expect(@person.score).to eq(2)
     end
 
     it "assigns two points per starship" do
-      allow(SwapiRb::People).to receive(:find_by_id).with(1).and_return(params)
-      person = Person.find_by_id(1)
-
       @person.starships = ["Millennium Falcon"]
+
       expect(@person.score).to eq(2)
     end
 
     it "assigns points for height" do
-      allow(SwapiRb::People).to receive(:find_by_id).with(1).and_return(params)
-      person = Person.find_by_id(1)
-
       @person.height = "170"
+
       expect(@person.score).to eq(3)
     end
 
     it "assigns points for mass" do
-      allow(SwapiRb::People).to receive(:find_by_id).with(1).and_return(params)
-      person = Person.find_by_id(1)
-
       @person.mass = "120"
+
       expect(@person.score).to eq(3)
     end
 
     it "assigns accumulates points for all values" do
-      allow(SwapiRb::People).to receive(:find_by_id).with(1).and_return(params)
-      person = Person.find_by_id(1)
-
       @person.films = ["A New Hope", "The Force Awakens"]
       @person.vehicles = ["AT-AT"]
       @person.starships = ["Millennium Falcon"]
       @person.height = "170"
       @person.mass = "120"
+
       expect(@person.score).to eq(12)
     end
   end
