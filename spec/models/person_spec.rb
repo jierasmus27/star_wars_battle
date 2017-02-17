@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Person, type: :model do
   let(:luke_skywalker_request_result) { create(:person_request, :luke_skywalker) }
-  let(:luke_skywalker) { create(:person, :luke_skywalker) }
 
   describe "#find_by_id" do
     before(:each) do
