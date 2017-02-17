@@ -30,22 +30,12 @@ class Person
     url.match(/http:\/\/swapi.co\/api\/people\/(.*)\//)[1].to_i
   end
 
-  def score
-    score = 0
-    score += films.count
-    score += vehicles.count * 2
-    score += starships.count * 2
-    score += (height.to_i/50).round(0).to_i
-    score += (mass.to_i/40).round(0).to_i
-    score
-  end
-
   def to_obj(params)
     params.each_pair.each do |k, val|
-      if (Person.method_defined? "#{k}=")
+      if (self.class.method_defined? "#{k}=")
         self.send("#{k}=", val)
       end
     end
-    @id = Person.extract_id(params.url)
+    @id = self.class.extract_id(params.url)
   end
 end

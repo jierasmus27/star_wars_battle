@@ -30,17 +30,6 @@ class Starship
     url.match(/http:\/\/swapi.co\/api\/starships\/(.*)\//)[1].to_i
   end
 
-  def score
-    score = 0
-    score += length.to_i
-    score += crew.to_i
-    score += max_atmosphering_speed.to_i
-    score += hyperdrive_rating.to_i
-    score += passengers.to_i
-    score += cargo_capacity.to_i
-    score
-  end
-
   def to_obj(params)
     params.each_pair.each do |k, val|
       if (Starship.method_defined? "#{k}=")
