@@ -13,9 +13,12 @@ class Starship
 
   def self.all
     api_val = Rails.cache.fetch("swapi_rb_ship", expires_in: 25.minutes) do
-      SwapiRb::Starship.all
+        SwapiRb::Starship.all
     end
     to_starships api_val
+  rescue => e
+    Rails.logger.error "Starship error received: #{e.message}"
+    return []
   end
 
   def self.to_starships(api_val)
