@@ -16,6 +16,9 @@ class Person
       SwapiRb::People.all
     end
     to_people api_val
+  rescue => e
+    Rails.logger.error "Person error received: #{e.message}"
+    return []
   end
 
   def self.to_people(api_val)

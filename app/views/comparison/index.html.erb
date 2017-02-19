@@ -1,0 +1,54 @@
+<%= form_tag("/compare/person", :remote => true, :id => "people_form", method: :get) do %>
+<div class="container-fluid">
+  <div class="row">
+    <h2> &nbsp;Compare Characters</h2>
+    <div class="col-md-4">
+      <%= label_tag(:secondary_id, "The incumbent:") %>
+      <%= select_tag 'primary_id', options_for_select(@people.collect{ |p| [p.name, p.id] } ), {:class => 'form-control'} %>
+    </div>
+    <div class="col-md-4">
+      <%= label_tag(:secondary_id, "The challenger:") %>
+      <%= select_tag 'secondary_id', options_for_select(@people.collect{ |p| [p.name, p.id] }), {:class => 'form-control'} %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <br />
+      <input type="submit" value="Compare characters" class="btn btn-warning" <%= people_status %> />
+    </div>
+  </div>
+  <div class="row">
+    <br />
+    <div class="col-md-10" id="person_results">
+    </div>
+  </div>
+</div>
+<% end %>
+
+<%= form_tag("/compare/starship", :remote => true, :id => "ships_form", method: :get) do %>
+<div class="container-fluid">
+  <div class="row">
+    <h2> &nbsp;Compare Starships</h2>
+    <div class="col-md-4">
+      <%= label_tag(:primary_ship_id, "Starship one:") %>
+      <%= select_tag 'primary_id', options_for_select(@starships.collect{ |s| [s.name, s.id] } ), {:class => 'form-control'} %>
+    </div>
+    <div class="col-md-4">
+      <%= label_tag(:secondary_ship_id, "Challenger ship:") %>
+      <%= select_tag 'secondary_id', options_for_select(@starships.collect{ |s| [s.name, s.id] }), {:class => 'form-control'} %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <br />
+      <input type="submit" value="Compare starships" class="btn btn-warning" <%= starship_status %> />
+    </div>
+  </div>
+  <div class="row">
+    <br />
+    <div class="col-md-10" id="ship_results">
+    </div>
+    <br />
+  </div>
+</div>
+<% end %>
