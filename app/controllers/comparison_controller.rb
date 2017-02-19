@@ -8,8 +8,8 @@ class ComparisonController < ApplicationController
     @people = Person.all
     @starships = Starship.all
 
-    flash[:warning] = "Some data could not be loaded for #{entities_not_loaded}" if one_entity_not_loaded
-    flash[:danger] = "Data could not be loaded for #{entities_not_loaded}" if no_entities_loaded
+    flash[:warning] = "The functionality for comparing #{entities_not_loaded} is temporarily unavailable, as the data could be loaded" if one_entity_not_loaded
+    flash[:danger] = "The functionality for comparing both #{entities_not_loaded} is temporarily unavailable, as no data could be loaded" if no_entities_loaded
   end
 
   def compare

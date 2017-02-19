@@ -12,6 +12,7 @@ module ComparisonHelper
     entities += "characters" if people_not_loaded
     entities += " and " if no_entities_loaded
     entities += "starships" if starships_not_loaded
+    entities
   end
 
   def people_not_loaded
