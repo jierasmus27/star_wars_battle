@@ -35,10 +35,10 @@ class Starship
 
   def to_obj(params)
     params.each_pair.each do |k, val|
-      if (Starship.method_defined? "#{k}=")
+      if (self.class.method_defined? "#{k}=")
         self.send("#{k}=", val)
       end
     end
-    @id = Starship.extract_id(params.url)
+    @id = self.class.extract_id(params.url)
   end
 end
