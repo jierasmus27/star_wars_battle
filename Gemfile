@@ -22,7 +22,8 @@ gem 'coffee-rails', '~> 4.2'
 # gem 'therubyracer', platforms: :ruby
 #
 # Custom Star Wars API gem
-gem 'swapi_rb', :git => 'git@github.com:jierasmus27/Swapi_rb.git'
+#gem 'swapi_rb', :git => 'git@github.com:jierasmus27/Swapi_rb.git'
+gem 'swapi_rb', :path => 'swapi_rb'
 
 gem 'bootstrap-sass', '~> 3.3.1'
 
@@ -60,6 +61,7 @@ end
 
 group :test do
   gem 'simplecov', :require => false
+  gem 'shoulda-matchers', '~> 3.1'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
