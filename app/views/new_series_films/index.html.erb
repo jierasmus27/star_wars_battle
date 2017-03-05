@@ -1,0 +1,28 @@
+<h1>All New Series Films</h1>
+
+<table>
+  <tr>
+    <th>Episode</th>
+    <th>Opening Crawl</th>
+    <th>Director</th>
+    <th>Producer</th>
+    <th>Release Date</th>
+  </tr>
+
+<% @new_series_films.each do |film| %>
+  <tr>
+    <td><%= film.episode %></td>
+    <td><%= film.opening_crawl %></td>
+    <td><%= film.director %></td>
+    <td><%= film.producer %></td>
+    <td><%= film.release_date %></td>
+    <td><%= link_to "Show", film %></td>
+    <!-- <td><%= link_to "Edit", edit_film_path(film) %></td> -->
+    <td><%= link_to "Remove", film, method: :delete, data: { confirm: "Are you sure?" } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br>
+
+<%= link_to "Add New Series Film", new_new_series_film_path %>

@@ -4,6 +4,6 @@ Rails.application.routes.draw do
 
   get 'compare/:entity', to: 'comparison#compare', as: "compare"
 
-  resources :new_series_films, only: [:new, :create, :show]
+  resources :new_series_films, only: [:new, :create, :index, :show]
 
 end

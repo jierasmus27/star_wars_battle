@@ -19,6 +19,9 @@ class NewSeriesFilmsController < ApplicationController
     @new_series_film = NewSeriesFilm.find(params[:id])
   end
 
+  def index
+  end
+
   private
 
   # Never trust parameters from the scary internet, only allow the white list through.

@@ -16,6 +16,32 @@ RSpec.describe NewSeriesFilmsController, type: :controller do
     end
   end
 
+  describe "GET 'index'" do
+    it "returns http success" do
+      get 'index'
+      expect(response).to be_success
+    end
+
+    it "renders the index template" do
+      get 'index'
+      expect(response).to render_template(:index)
+    end
+  end
+
+  describe "GET 'show'" do
+    it "returns http success" do
+      new_series_film = create(:new_series_film)
+      get 'show', id: new_series_film.id
+      expect(response).to be_success
+    end
+
+    it "renders the show template" do
+      new_series_film = create(:new_series_film)
+      get 'show', id: new_series_film.id
+      expect(response).to render_template(:show)
+    end
+  end
+
   describe "POST 'create'" do
     it "creates new_series_film" do
       expect { post :create, :new_series_film => new_series_film_params }.to change(NewSeriesFilm, :count).by(1)
