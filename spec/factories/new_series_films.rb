@@ -5,6 +5,5 @@ FactoryGirl.define do
     director "MyString"
     producer "MyString"
     release_date "2017-03-02 19:46:43"
-    new_series_person nil
   end
 end

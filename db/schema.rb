@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170302214120) do
+ActiveRecord::Schema.define(version: 20170305143606) do
 
   create_table "NewSeriesFilms_NewSeriesTeachers", id: false, force: :cascade do |t|
     t.integer "new_series_film_id",    null: false
@@ -23,10 +23,11 @@ ActiveRecord::Schema.define(version: 20170302214120) do
     t.string   "director"
     t.string   "producer"
     t.datetime "release_date"
-    t.integer  "new_series_person_id"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-    t.index ["new_series_person_id"], name: "index_new_series_films_on_new_series_person_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["episode_id"], name: "index_new_series_films_on_episode_id", unique: true
+    t.index ["opening_crawl"], name: "index_new_series_films_on_opening_crawl", unique: true
+    t.index ["release_date"], name: "index_new_series_films_on_release_date", unique: true
   end
 
   create_table "new_series_films_people", id: false, force: :cascade do |t|
