@@ -47,12 +47,12 @@ RSpec.describe NewSeriesFilmsController, type: :controller do
       expect { post :create, :new_series_film => new_series_film_params }.to change(NewSeriesFilm, :count).by(1)
     end
 
-    it "assigns a newly created circuit as @circuit" do
+    it "assigns a newly created new_series_film as @new_series_film" do
       post :create, :new_series_film => new_series_film_params
       expect(assigns(:new_series_film)).to be_a(NewSeriesFilm)
     end
 
-    it "redirects to the parent notice" do
+    it "redirects to the new new_series_film" do
       post :create, :new_series_film => new_series_film_params
       expect(response).to redirect_to(new_series_film_path(assigns(:new_series_film)))
     end

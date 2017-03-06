@@ -11,13 +11,12 @@
 
 <% @new_series_films.each do |film| %>
   <tr>
-    <td><%= film.episode %></td>
+    <td><%= film.episode_id %></td>
     <td><%= film.opening_crawl %></td>
     <td><%= film.director %></td>
     <td><%= film.producer %></td>
     <td><%= film.release_date %></td>
     <td><%= link_to "Show", film %></td>
-    <!-- <td><%= link_to "Edit", edit_film_path(film) %></td> -->
     <td><%= link_to "Remove", film, method: :delete, data: { confirm: "Are you sure?" } %></td>
   </tr>
 <% end %>

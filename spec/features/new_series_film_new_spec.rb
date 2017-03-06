@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.feature "Create new films", :type => :feature do
-  feature 'User creates a new film' do
+RSpec.feature "Create new people", :type => :feature do
+  feature 'User creates a new person' do
     scenario 'they see the form on the page' do
       visit new_new_series_film_path
 

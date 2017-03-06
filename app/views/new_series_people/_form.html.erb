@@ -1,0 +1,68 @@
+<%= form_for(@new_series_person) do |f| %>
+  <% if @new_series_person.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@new_series_person.errors.count, "error") %> prohibited this blog from being saved:</h2>
+
+      <ul>
+      <% @new_series_person.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="container">
+    <div class="form-group row">
+      <%= f.label :name, "Name", :class => 'col-md-2 col-form-label' %>
+      <div class="col-md-9">
+        <%= f.text_field :name, :class => 'form-control' %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.label :height, "Height", :class => 'col-md-2 col-form-label' %>
+      <div class="col-md-9">
+        <%= f.text_field :height, :class => 'form-control' %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.label :mass, "Mass", :class => 'col-md-2 col-form-label' %>
+      <div class="col-md-9">
+        <%= f.text_field :mass, :class => 'form-control' %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.label :hair_color, "Hair color", :class => 'col-md-2 col-form-label' %>
+      <div class="col-md-9">
+        <%= f.text_field :hair_color, :class => 'form-control' %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.label :skin_color, "Skin color", :class => 'col-md-2 col-form-label' %>
+      <div class="col-md-9">
+        <%= f.text_field :skin_color, :class => 'form-control' %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.label :eye_color, "Eye color", :class => 'col-md-2 col-form-label' %>
+      <div class="col-md-9">
+        <%= f.text_field :eye_color, :class => 'form-control' %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.label :birth_year, "Birth year", :class => 'col-md-2 col-form-label' %>
+      <div class="col-md-9">
+        <%= f.text_field :birth_year, :class => 'form-control' %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.label :gender, "Gender", :class => 'col-md-2 col-form-label' %>
+      <div class="col-md-9">
+        <%= f.text_field :gender, :class => 'form-control' %>
+      </div>
+    </div>
+
+    <div class="actions">
+      <%= f.submit :class => 'btn btn-warning' %>
+    </div>
+  </div>
+<% end %>

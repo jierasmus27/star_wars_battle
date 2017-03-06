@@ -20,6 +20,7 @@ class NewSeriesFilmsController < ApplicationController
   end
 
   def index
+    @new_series_films = NewSeriesFilm.all
   end
 
   private
