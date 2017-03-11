@@ -19,6 +19,10 @@ class NewSeriesPeopleController < ApplicationController
     @new_series_person = NewSeriesPerson.find(params[:id])
   end
 
+  def index
+    @new_series_people = NewSeriesPerson.all
+  end
+
   private
 
   def new_series_person_params

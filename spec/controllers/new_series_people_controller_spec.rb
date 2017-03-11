@@ -18,15 +18,31 @@ RSpec.describe NewSeriesPeopleController, type: :controller do
 
   describe "GET 'show'" do
     it "returns http success" do
-      new_series_person = create(:new_series_person)
       get 'show', id: new_series_person.id
       expect(response).to be_success
     end
 
     it "renders the show template" do
-      new_series_person = create(:new_series_person)
       get 'show', id: new_series_person.id
       expect(response).to render_template(:show)
+    end
+  end
+
+  describe "GET 'index'" do
+    it "returns http success" do
+      get 'index'
+      expect(response).to be_success
+    end
+
+    it "assigns an array of NewSeriesPeople" do
+      new_series_people = NewSeriesPerson.all
+      get 'index'
+      expect(assigns(:new_series_people)).to eq(new_series_people)
+    end
+
+    it "renders the index template" do
+      get 'index'
+      expect(response).to render_template(:index)
     end
   end
 
@@ -44,6 +60,5 @@ RSpec.describe NewSeriesPeopleController, type: :controller do
       post :create, :new_series_person => new_series_person_params
       expect(response).to redirect_to(new_series_person_path(assigns(:new_series_person)))
     end
-
   end
 end

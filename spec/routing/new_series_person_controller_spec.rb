@@ -15,5 +15,9 @@ describe "Routes", :type => "routing" do
       expect(get("/new_series_people/1")).to route_to(:controller => "new_series_people", :action => "show", :id => "1")
     end
 
+    it "routes to #index for the index action" do
+      expect(get("/new_series_people")).to route_to(:controller => "new_series_people", :action => "index")
+    end
+
   end
 end

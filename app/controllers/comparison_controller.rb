@@ -2,11 +2,11 @@ class ComparisonController < ApplicationController
   include ComparisonHelper
 
   before_action :validate_allowed_entities, only: [:compare]
-  before_action :set_entities, only: [:compare]
+  before_action :set_primary_and_secondary, only: [:compare]
 
   def index
-    @people = Person.all
-    @starships = Starship.all
+    @people = set_entities(Person)
+    @starships = set_entities(Starship)
 
     flash[:warning] = "The functionality for comparing #{entities_not_loaded} is temporarily unavailable, as the data could be loaded" if one_entity_not_loaded
     flash[:danger] = "The functionality for comparing both #{entities_not_loaded} is temporarily unavailable, as no data could be loaded" if no_entities_loaded
@@ -21,9 +21,19 @@ class ComparisonController < ApplicationController
 
   private
 
-  def set_entities
-    @primary = entity_class.find_by_id(params[:primary_id])
-    @secondary = entity_class.find_by_id(params[:secondary_id])
+  def set_primary_and_secondary
+    @primary = set_entity(params[:primary_id])
+    @secondary = set_entity(params[:secondary_id])
+  end
+
+  def set_entity(id)
+    response = SwapiEntityQuery.new(entity_class).find(id)
+    entity_class.new(response)
+  end
+
+  def set_entities(entity)
+    response = SwapiEntitiesQuery.new(entity).call
+    entity.to_entity_array(response)
   end
 
   def entity_class

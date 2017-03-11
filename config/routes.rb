@@ -6,5 +6,5 @@ Rails.application.routes.draw do
 
   resources :new_series_films, only: [:new, :create, :index, :show]
 
-  resources :new_series_people, only: [:new, :create, :show]
+  resources :new_series_people, only: [:new, :create, :index, :show]
 end
