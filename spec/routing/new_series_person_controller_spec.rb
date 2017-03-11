@@ -19,5 +19,9 @@ describe "Routes", :type => "routing" do
       expect(get("/new_series_people")).to route_to(:controller => "new_series_people", :action => "index")
     end
 
+    it "routes to #delete for the delete action" do
+      expect(delete("/new_series_people/1")).to route_to(:controller => "new_series_people", :action => "destroy", :id => "1")
+    end
+
   end
 end

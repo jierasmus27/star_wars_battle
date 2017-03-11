@@ -1,4 +1,6 @@
 class NewSeriesPeopleController < ApplicationController
+  before_action :set_new_series_person, only: [:destroy, :show]
+
   def new
     @new_series_person = NewSeriesPerson.new
   end
@@ -16,17 +18,27 @@ class NewSeriesPeopleController < ApplicationController
   end
 
   def show
-    @new_series_person = NewSeriesPerson.find(params[:id])
   end
 
   def index
     @new_series_people = NewSeriesPerson.all
   end
 
+  def destroy
+    @new_series_person.destroy
+    respond_to do |format|
+      format.html { redirect_to new_series_people_url, notice: 'User was successfully destroyed.' }
+    end
+  end
+
   private
 
   def new_series_person_params
     params.require(:new_series_person).permit(:name, :height, :mass, :hair_color, :skin_color, :eye_color, :birth_year, :gender)
+  end
+
+  def set_new_series_person
+    @new_series_person = NewSeriesPerson.find(params[:id])
   end
 
 end

@@ -61,4 +61,16 @@ RSpec.describe NewSeriesPeopleController, type: :controller do
       expect(response).to redirect_to(new_series_person_path(assigns(:new_series_person)))
     end
   end
+
+  describe "DELETE 'destroy'" do
+    it "removes object from array of NewSeriesPeople" do
+      new_person = create(:new_series_person)
+      expect{ delete :destroy, :id => new_person.id }.to change(NewSeriesPerson, :count).by(-1)
+    end
+
+    it "renders the index template" do
+      delete 'destroy', id: new_series_person.id
+      expect(response).to redirect_to(new_series_people_path)
+    end
+  end
 end
