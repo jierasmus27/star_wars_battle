@@ -25,7 +25,6 @@ class NewSeriesPeopleController < ApplicationController
   end
 
   def destroy
-    byebug
     @new_series_person.destroy
     respond_to do |format|
       format.html { redirect_to new_series_people_url, notice: 'User was successfully destroyed.' }

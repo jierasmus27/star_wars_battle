@@ -70,3 +70,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "rubycritic", :require => false
 gem 'capybara'
+
+gem 'devise'
+gem 'omniauth-twitter'

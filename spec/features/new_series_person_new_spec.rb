@@ -1,7 +1,13 @@
 require 'rails_helper'
 
 RSpec.feature "Create new People", :type => :feature do
+
   feature 'User creates a new person' do
+    before :each do
+      user = FactoryGirl.create(:user, :email => 'j@e.is.co.za', :password => 'something')
+      login_as(user, :scope => :user)
+    end
+
     scenario 'they see the form on the page' do
       visit new_new_series_person_path
 
@@ -13,6 +19,7 @@ RSpec.feature "Create new People", :type => :feature do
       expect(page).to have_text("Eye color")
       expect(page).to have_text("Birth year")
       expect(page).to have_text("Gender")
+
     end
 
     scenario 'a user can create a new person' do

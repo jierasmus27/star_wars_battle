@@ -11,13 +11,15 @@ RSpec.describe Starship, type: :model do
     end
 
     it "sets all attributes received" do
-      starship = Starship.find_by_id(5)
+      starship_result = SwapiEntityQuery.new(Starship).find(5)
+      starship = Starship.new(starship_result)
 
       expect(starship.name).to eq(sentinel_request_result.name)
     end
 
     it "sets the id attribute from the url" do
-      starship = Starship.find_by_id(5)
+      starship_result = SwapiEntityQuery.new(Starship).find(5)
+      starship = Starship.new(starship_result)
 
       expect(starship.id).to eq(5)
     end

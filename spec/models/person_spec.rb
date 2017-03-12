@@ -11,13 +11,15 @@ RSpec.describe Person, type: :model do
     end
 
     it "sets all attributes received" do
-      person = Person.find_by_id(1)
+      person_result = SwapiEntityQuery.new(Person).find(1)
+      person = Person.new(person_result)
 
       expect(person.name).to eq(luke_skywalker_request_result.name)
     end
 
     it "sets the id attribute from the url" do
-      person = Person.find_by_id(1)
+      person_result = SwapiEntityQuery.new(Person).find(1)
+      person = Person.new(person_result)
 
       expect(person.id).to eq(1)
     end

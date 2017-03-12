@@ -2,6 +2,11 @@ require 'rails_helper'
 
 RSpec.feature "Display index of people", :type => :feature do
   feature 'User lists all people' do
+    before :each do
+      user = FactoryGirl.create(:user, :email => 'j@e.is.co.za', :password => 'something')
+      login_as(user, :scope => :user)
+    end
+
     scenario 'they see the people headings on the page' do
       visit new_series_people_path
 

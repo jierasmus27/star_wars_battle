@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   root 'comparison#index'
 
   get 'compare/:entity', to: 'comparison#compare', as: "compare"

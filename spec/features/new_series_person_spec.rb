@@ -2,6 +2,11 @@ require 'rails_helper'
 
 RSpec.feature "Feature for New Series People", :type => :feature do
   feature 'User deletes person' do
+    before :each do
+      user = FactoryGirl.create(:user, :email => 'j@e.is.co.za', :password => 'something')
+      login_as(user, :scope => :user)
+    end
+    
     scenario 'they see the people details on the page' do
       new_series_person_one = create(:new_series_person, name: "Luke")
       new_series_person_two = create(:new_series_person, name: "Leia")
