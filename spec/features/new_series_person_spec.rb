@@ -25,6 +25,12 @@ RSpec.feature "Feature for New Series People", :type => :feature do
       visit new_series_people_path
 
       expect(page).to have_text("Luke")
+      expect(page).to have_text("Leia")
+
+      within("//tr#index_people_row_#{new_series_person_one.id}") do
+        # byebug
+        #expect{ page.accept_confirm { click_link 'Remove' } }.to change(NewSeriesPerson, :count).by(-1)
+      end
     end
   end
 end

@@ -13,7 +13,7 @@
   </tr>
 
 <% @new_series_people.each do |person| %>
-  <tr>
+  <tr id="index_people_row_<%= person.id %>">
     <td><%= person.name %></td>
     <td><%= person.height %></td>
     <td><%= person.hair_color %></td>
@@ -22,7 +22,7 @@
     <td><%= person.birth_year %></td>
     <td><%= person.gender %></td>
     <td><%= link_to "Show", person %></td>
-    <td><%= link_to "Remove", person, method: :delete, data: { confirm: "Are you sure?" } %></td>
+    <td><%= link_to "Remove", person, remote: true, method: :delete, data: { confirm: "Are you sure?" } %></td>
   </tr>
 <% end %>
 </table>
